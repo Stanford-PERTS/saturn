@@ -1,0 +1,15 @@
+/* Material-UI label styles */
+/* But `:not(.MuiInputLabel-root)` so that we don't affect text field labels */
+.MuiFormControl-root .MuiFormLabel-root:not(.MuiInputLabel-root) {
+  font-size: 18.5px;
+  font-weight: bold;
+  color: #000000;
+  /* Match theme.units.fieldPadding */
+  margin-bottom: 12px;
+}
+
+/* Material-UI label styles, when focused */
+/* Need to reapply this rule since the above wipes it. */
+.MuiFormControl-root .MuiFormLabel-root.Mui-focused {
+  color: #2296F3;
+}

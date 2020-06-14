@@ -1,0 +1,29 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": {
+    "predeploy": [
+      "[ ! \"$CI\" = true ] && npm --prefix \"$RESOURCE_DIR\" run lint || echo \"skipping predploy scripts in CI\"",
+      "[ ! \"$CI\" = true ] && npm --prefix \"$RESOURCE_DIR\" run build || echo \"skipping predploy scripts in CI\""
+    ]
+  },
+  "hosting": {
+    "predeploy": [
+      "[ ! \"$CI\" = true ] && npm --prefix \"$PROJECT_DIR/hosting\" run lint || echo \"skipping predploy scripts in CI\"",
+      "[ ! \"$CI\" = true ] && npm --prefix \"$PROJECT_DIR/hosting\" run build || echo \"skipping predploy scripts in CI\""
+    ],
+    "public": "hosting/build",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "storage": {
+    "rules": "storage.rules"
+  }
+}

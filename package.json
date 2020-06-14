@@ -1,0 +1,34 @@
+{
+  "name": "saturn",
+  "engines": {
+    "node": "10"
+  },
+  "scripts": {
+    "start": "run-p start:react start:firebase",
+    "start:react": "npm --prefix ./hosting start",
+    "start:firebase": "firebase emulators:start",
+    "postinstall": "npm run install:all",
+    "install:all": "run-p install:functions install:hosting",
+    "install:functions": "npm --prefix ./functions install",
+    "install:hosting": "npm --prefix ./hosting install",
+    "build:all": "run-p build:functions build:hosting",
+    "build:functions": "npm --prefix ./functions run build",
+    "build:hosting": "npm --prefix ./hosting run build",
+    "setup:all": "run-s setup:firebase setup:firebase:emulators",
+    "setup:firebase": "npm install -g firebase-tools@latest",
+    "setup:firebase:emulators": "firebase setup:emulators:firestore",
+    "test:all:ci": "CI=true run-s test:firestore test:hosting",
+    "test:firestore": "jest test/*.test.js",
+    "test:hosting": "npm --prefix ./hosting test",
+    "lint:all": "run-s lint:functions lint:hosting",
+    "lint:functions": "npm --prefix ./functions run lint",
+    "lint:hosting": "npm --prefix ./hosting run lint"
+  },
+  "dependencies": {
+    "@firebase/testing": "^0.15.0",
+    "eslint": "^6.6.0",
+    "jest": "^24.9.0",
+    "npm-run-all": "^4.1.5"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,75 @@
+// firebase.google.com/docs/firestore/security/rules-conditions
+//
+// https://firebase.google.com/docs/firestore/security/rules-conditions#custom_functions
+//
+// > The syntax for custom functions is a bit like JavaScript, but security
+// > rules functions are written in a domain-specific language that has some
+// > important limitations
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Secure by default
+    match /{document=**} {
+      allow read: if false;
+      allow write: if false;
+    }
+
+    // Open demo collection for read/write
+    match /demo/{document=**} {
+      allow read, write;
+    }
+
+    match /responses/{responseId} {
+      allow read: if true;
+      allow create: if true;
+      allow update: if hasNoDisallowedFields() &&
+        hasNonEmptyAnswers() &&
+        progressIsntDecremented();
+    }
+
+    match /answers/{responseId} {
+      allow read: if false; // READ NOT ALLOWED
+      allow write: if true;
+      allow update: if hasNoDisallowedFields() &&
+        hasNonEmptyAnswers() &&
+        progressIsntDecremented();
+    }
+
+    function existingData() {
+      return resource.data;
+    }
+
+    function incomingData() {
+      // https://firebase.google.com/docs/reference/rules/rules.firestore.Resource#data
+      // Includes a Map of the entire document after the write.
+      return request.resource.data;
+    }
+
+    function hasNoDisallowedFields() {
+      // Since `request.resource.data` contains a Map of the entire document
+      // as it would be after the write, we can't do the following:
+      // 
+      // return incomingData().keys().hasOnly('answers', 'page', 'progress');
+      // 
+      // Instead we need to check the before/after for each field we want to
+      // keep from being updated.
+      return
+        existingData().createdOn == incomingData().createdOn &&
+        existingData().meta == incomingData().meta &&
+        existingData().surveyLabel == incomingData().surveyLabel;
+    }
+
+    function hasNonEmptyAnswers() {
+      // Since we are performing all of our updates with a { merge: true }, we
+      // are disallowing empty `answers` to prevent accidentally losing all
+      // existing answers. 
+      return incomingData().answers != {};
+    }
+
+    function progressIsntDecremented() {
+      return existingData().progress <= incomingData().progress;
+    }
+  }
+}

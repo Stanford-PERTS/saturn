@@ -1,0 +1,60 @@
+{
+  "name": "saturn-hosting",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "4.7.1",
+    "@material-ui/icons": "4.5.1",
+    "@sentry/browser": "5.10.2",
+    "@types/lodash": "4.14.147",
+    "@types/yup": "0.26.24",
+    "capitalize": "^2.0.1",
+    "eslint": "6.6.0",
+    "eslint-config-prettier": "6.5.0",
+    "eslint-plugin-babel": "5.3.0",
+    "eslint-plugin-prettier": "3.1.1",
+    "faker": "^4.1.0",
+    "firebase": "7.3.0",
+    "formik": "2.0.6",
+    "formik-material-ui": "1.0.0",
+    "lodash": "4.17.15",
+    "moment": "2.24.0",
+    "perts-ui": "git+https://github.com/PERTS/perts-ui.git#42f1f34",
+    "prettier": "1.19.1",
+    "prop-types": "15.7.2",
+    "query-string": "6.9.0",
+    "react": "16.11.0",
+    "react-dom": "16.11.0",
+    "react-icons": "3.9.0",
+    "react-router-dom": "5.1.2",
+    "react-scripts": "3.2.0",
+    "styled-components": "5.1.0",
+    "urijs": "1.19.2",
+    "yup": "0.27.0"
+  },
+  "devDependencies": {
+    "@types/capitalize": "^1.0.1",
+    "@types/faker": "^4.1.9",
+    "@types/jest": "24.0.23",
+    "@types/node": "12.12.7",
+    "@types/react": "16.9.11",
+    "@types/react-dom": "16.9.4",
+    "@types/react-router-dom": "5.1.2",
+    "@types/styled-components": "4.4.0",
+    "@types/urijs": "1.19.4",
+    "typescript": "3.7.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint src/"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie < 11",
+    "not op_mini all"
+  ]
+}

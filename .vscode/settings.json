@@ -1,0 +1,27 @@
+// Project specific vscode settings. It's probably best to keep the project
+// level enforced settings.json down to a minimum, but below are the settings
+// that I have found to be necessary to get linting working in vscode with our
+// Firebase setup.
+{
+  // To enable vscode to function with multiple directories (monorepo style).
+  // https://github.com/microsoft/vscode-eslint/commit/fe8f954bc4419f11e5c1000550f600b47ccacf96
+  "eslint.workingDirectories": [
+    {
+      "directory": "./hosting",
+      "changeProcessCWD": true
+    }
+  ],
+  // To enable vscode to run eslint on 
+  "eslint.validate": [
+    "javascript", // .js
+    "javascriptreact", // .jsx
+    {
+      "language": "typescript", // .ts
+      "autoFix": true
+    },
+    {
+      "language": "typescriptreact", // .tsx
+      "autoFix": true
+    }
+  ],
+}

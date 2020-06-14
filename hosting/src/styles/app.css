@@ -1,0 +1,4 @@
+body {
+  /* Safe min width for survey UI and completion code, etc. */
+  min-width: 360px;
+}
